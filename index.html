@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>EduPrompt Builder – Generador de Prompts Educativos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1>EduPrompt Builder</h1>
+    <p>Generador de prompts educativos para docentes y formadores.</p>
+</header>
+
+<main>
+    <section class="intro">
+        <h2>¿Qué es esto?</h2>
+        <p>
+            Esta herramienta te ayuda a diseñar prompts efectivos para crear material educativo con ChatGPT,
+            combinando tono, estilo, rol docente, tipo de tarea, audiencia y objetivo.
+        </p>
+    </section>
+
+    <section class="form-section">
+        <h2>Configura tu prompt</h2>
+
+        <form id="promptForm">
+            <div class="form-group">
+                <label for="tema">Tema educativo</label>
+                <input type="text" id="tema" placeholder="Ej.: Fracciones, redes TCP/IP, resiliencia personal..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="nivel">Nivel educativo</label>
+                <select id="nivel">
+                    <option value="Primaria">Primaria</option>
+                    <option value="Secundaria">Secundundaria</option>
+                    <option value="FP">Formación Profesional</option>
+                    <option value="Universidad">Universidad</option>
+                    <option value="Formación continua">Formación continua</option>
+                    <option value="Necesidades especiales">Necesidades especiales</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="audiencia">Audiencia específica</label>
+                <input type="text" id="audiencia" placeholder="Ej.: alumnado de 3º ESO, docentes en activo, etc.">
+            </div>
+
+            <div class="form-group">
+                <label for="profesion">Profesión / rol</label>
+                <select id="profesion">
+                    <option value="Profesor de secundaria">Profesor de secundaria</option>
+                    <option value="Profesor de primaria">Profesor de primaria</option>
+                    <option value="Profesor de infantil">Profesor de infantil</option>
+                    <option value="Profesor universitario">Profesor universitario</option>
+                    <option value="Diseñador gráfico">Diseñador gráfico</option>
+                    <option value="Experto en didáctica">Experto en didáctica</option>
+                    <option value="Experto en e-learning">Experto en e-learning</option>
+                    <option value="Experto en tema concreto">Experto en [tema concreto]</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="tipoMaterial">Tipo de material educativo</label>
+                <select id="tipoMaterial">
+                    <option value="Plan de lección">Plan de lección</option>
+                    <option value="Guía de estudio">Guía de estudio</option>
+                    <option value="Ejercicio práctico">Ejercicio práctico</option>
+                    <option value="Evaluación">Evaluación</option>
+                    <option value="Resumen de lectura">Resumen de lectura</option>
+                    <option value="Presentación">Presentación</option>
+                    <option value="Juego educativo">Juego educativo</option>
+                    <option value="Ficha de lectura">Ficha de lectura</option>
+                    <option value="Flashcards">Flashcards</option>
+                    <option value="Guion para video educativo">Guion para video educativo</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="objetivo">Objetivo del aprendizaje</label>
+                <input type="text" id="objetivo" placeholder="Ej.: comprender, aplicar, analizar, reflexionar..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="tono">Tono del contenido</label>
+                <select id="tono">
+                    <option value="Casual">Casual</option>
+                    <option value="Formal">Formal</option>
+                    <option value="Inspirador">Inspirador</option>
+                    <option value="Formativo">Formativo</option>
+                    <option value="Descriptivo">Descriptivo</option>
+                    <option value="Persuasivo">Persuasivo</option>
+                    <option value="Expositivo">Expositivo</option>
+                    <option value="Instructivo">Instructivo</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="estilo">Estilo del material</label>
+                <select id="estilo">
+                    <option value="Narrativo">Narrativo</option>
+                    <option value="Informar">Informar</option>
+                    <option value="Evaluar">Evaluar</option>
+                    <option value="Educar">Educar</option>
+                    <option value="Inspirar">Inspirar</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="elementos">Elementos necesarios</label>
+                <textarea id="elementos" rows="3" placeholder="Ej.: incluir ejemplos, rúbrica, preguntas abiertas, actividades prácticas..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="fraseGancho">Frase gancho (opcional)</label>
+                <select id="fraseGancho">
+                    <option value="">Sin frase gancho</option>
+                    <option value="Descubre cómo [lograr un objetivo educativo]">Descubre cómo [lograr un objetivo educativo]</option>
+                    <option value="Los mejores métodos para [mejorar una habilidad]">Los mejores métodos para [mejorar una habilidad]</option>
+                    <option value="La guía definitiva para [tema educativo]">La guía definitiva para [tema educativo]</option>
+                    <option value="10 formas de [resolver un problema educativo]">10 formas de [resolver un problema educativo]</option>
+                    <option value="¿Por qué es importante [tema educativo]?">¿Por qué es importante [tema educativo]?</option>
+                </select>
+            </div>
+
+            <button type="button" id="generateBtn">Generar prompt</button>
+        </form>
+    </section>
+
+    <section class="output-section">
+        <h2>Prompt generado</h2>
+        <textarea id="outputPrompt" readonly></textarea>
+
+        <button type="button" id="copyBtn">Copiar prompt</button>
+    </section>
+
+    <section class="tips-section">
+        <h2>Consejos para utilizar ChatGPT en educación</h2>
+        <ul>
+            <li><strong>Sé preciso:</strong> indica claramente el tipo de material que quieres.</li>
+            <li><strong>Usa ejemplos:</strong> muestra modelos de tareas o actividades similares.</li>
+            <li><strong>Ajusta el tono:</strong> especifica si quieres algo formal, casual, inspirador, etc.</li>
+            <li><strong>Revisa y edita:</strong> adapta siempre el contenido generado a tu contexto real.</li>
+            <li><strong>Genera ideas:</strong> utiliza ChatGPT para lluvia de ideas y variaciones.</li>
+            <li><strong>Experimenta:</strong> prueba diferentes combinaciones de rol, estilo y objetivo.</li>
+        </ul>
+    </section>
+</main>
+
+<footer>
+    <p>Proyecto creado para Luciano Francisco Amaya Gutiérrez – EduPrompt Builder.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
